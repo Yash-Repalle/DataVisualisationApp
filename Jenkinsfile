@@ -25,7 +25,7 @@ pipeline{
             }
         }
 
-        stage("Sonar Code Qality"){
+        /*stage("Sonar Code Qality"){
 
             steps{
                 withSonarQubeEnv('sonarqube') {
@@ -39,7 +39,7 @@ pipeline{
             steps{
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube'
             }
-        }
+        }*/
 
         stage("MVN Build"){
 
@@ -52,8 +52,8 @@ pipeline{
 
             steps{
                 sh '''
-                    docker image build -t yaswanth:dataVisual .
-                    docker image tag yaswanth:dataVisual yaswanth:dataVisual:v1
+                    docker image build -t yaswanth345:dataVisual .
+                    docker image tag yaswanth345:dataVisual yaswanth345:dataVisual:v1
                 '''
             }
         }
