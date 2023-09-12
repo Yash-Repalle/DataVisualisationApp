@@ -1,4 +1,4 @@
 FROM openjdk:8-jdk-alpine
-WORKDIR /app
-COPY ./target/*.jar /app.jar
-CMD [ "java", "-jar", "app.jar" ]
+WORKDIR /var/local/app
+COPY ./target/*.jar /var/local/app/app.jar
+CMD ["java", "-jar", "app.jar"]
