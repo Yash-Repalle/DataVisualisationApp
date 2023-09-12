@@ -28,7 +28,9 @@ pipeline{
         stage("Sonar Code Qality"){
 
             steps{
+                withSonarQubeEnv('sonarqube') {
                 sh 'mvn clean package sonar:sonar'
+              }
             }
         }
     }    
