@@ -57,5 +57,15 @@ pipeline{
                 '''
             }
         }
+
+        stage("Docker Image Scan : Trivy"){
+
+            steps{
+                sh '''
+                    trviy image yaswanth345/datavisual:v1 > scan.txt
+                    cat scan.txt
+                '''
+            }
+        }
     }    
 }
