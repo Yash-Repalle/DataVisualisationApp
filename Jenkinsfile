@@ -19,14 +19,18 @@ pipeline{
         stage("Unit Test Maven"){
 
             steps{
-                mvnTest()
+                script{
+                    mvnTest()
+                }
             }
         }
 
         stage("Intigration Test Maven"){
 
             steps{
-                mvnIntigrationTest()
+               script{
+                    mvnTIntigrationest()
+                }
             }
         }
 
