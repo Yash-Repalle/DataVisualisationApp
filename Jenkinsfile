@@ -40,5 +40,12 @@ pipeline{
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube'
             }
         }
+
+        stage("MVN Build"){
+
+            steps{
+                sh 'mvn clean install'
+            }
+        }
     }    
 }
