@@ -52,8 +52,8 @@ pipeline{
 
             steps{
                 sh '''
-                    docker image build -t yaswanth345/dataVisual .
-                    docker image tag yaswanth345/dataVisual yaswanth345/dataVisual:v1
+                    docker image build -t yaswanth345/datavisual .
+                    docker image tag yaswanth345/datavisual yaswanth345/datavisual:v1
                 '''
             }
         }
