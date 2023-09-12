@@ -81,20 +81,14 @@ pipeline{
         stage("Docker Image Scan : Trivy"){
 
             steps{
-                sh '''
-                    trivy image yaswanth345/datavisual:v1 > scan.txt
-                    cat scan.txt
-                '''
+                imageScanTrivy("${params.ImageName}", "${params.ImageTag}", "${params.DockerHubUser}")
             }
         }
 
         stage("Docker Image Push"){
 
             steps{
-                withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'pass', usernameVariable: 'username')]) {
-                    sh "docker login -u '$username' -p '$pass'"
-                }
-                sh "docker image push yaswanth345/datavisual:v1"
+                dockerImagePush("${params.ImageName}", "${params.ImageTag}", "${params.DockerHubUser}")
             }
         }
     }    
