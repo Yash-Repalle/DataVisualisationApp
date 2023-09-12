@@ -28,7 +28,7 @@ pipeline{
         stage("Sonar Code Qality"){
 
             steps{
-                withSonarQubeEnv('sonarqube-tocken') {
+                withSonarQubeEnv('sonarqube-token') {
                 sh 'mvn clean package sonar:sonar'
               }
             }
