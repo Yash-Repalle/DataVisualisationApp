@@ -2,12 +2,17 @@
 
 pipeline{
 
+    parameters{
+
+        choice(name: 'action', choice: 'create\ndestroy', description: 'create or delete')
+    }
+
     agent any
 
     stages{
 
         stage("Git checkout"){
-
+            when{ expression { params.action == 'create'}}
             steps{
                 gitCheckout(
                     branch: "main",
@@ -17,7 +22,7 @@ pipeline{
         }
 
         stage("Unit Test Maven"){
-
+            when{ expression { params.action == 'create'}}
             steps{
                 script{
                     mvnTest()
@@ -26,7 +31,7 @@ pipeline{
         }
 
         stage("Intigration Test Maven"){
-
+            when{ expression { params.action == 'create'}}
             steps{
                script{
                     mvnIntigrationTest()
@@ -34,11 +39,11 @@ pipeline{
             }
         }
 
-        /*stage("Sonar Code Qality"){
-
+        stage("Sonar Code Qality"){
+            when{ expression { params.action == 'create'}}
             steps{
-                withSonarQubeEnv('sonarqube') {
-                sh 'mvn clean package sonar:sonar'
+                def SonarQubecredentialsId = 'sonarqube-api'
+                statiCodeAnalysis(SonarQubecredentialsId)
               }
             }
         }
@@ -46,9 +51,10 @@ pipeline{
         stage("Sonar Qality Gates"){
 
             steps{
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube'
+                def SonarQubecredentialsId = 'sonarqube-api'
+                qualityGateAnalysis(SonarQubecredentialsId)
             }
-        }*/
+        }
 
         stage("MVN Build"){
 
