@@ -7,7 +7,10 @@ pipeline{
         stage("Git checkout"){
 
             steps{
-                git(url: 'https://github.com/Yash-Repalle/DataVisualisationApp.git', branch: 'main')
+                gitCheckout(
+                    branch: "main"
+                    url: "https://github.com/Yash-Repalle/DataVisualisationApp.git"
+                )
             }
         }
 
