@@ -5,6 +5,9 @@ pipeline{
     parameters{
 
         choice(name: 'action', choices: 'create\ndestroy', description: 'choose create or delete')
+        string(name: 'ImageName', description: "name of the docker build", defaultValue: 'datavisual')
+        string(name: 'ImageTag', description: "tag of the docker build", defaultValue: 'v1')
+        string(name: 'DockerHubUser', description: "name of the Application", defaultValue: 'yaswanth345')
     }
 
     agent any
@@ -62,17 +65,16 @@ pipeline{
         stage("MVN Build"){
 
             steps{
-                sh 'mvn clean install'
+                script{
+                    mvnBuild()
+                }
             }
         }
 
         stage("Docker Image Build"){
 
             steps{
-                sh '''
-                    docker image build -t yaswanth345/datavisual .
-                    docker image tag yaswanth345/datavisual yaswanth345/datavisual:v1
-                '''
+                buildDockerImage("${params.ImageName}", "${params.ImageTag}", "${params.DockerHubUser}")
             }
         }
 
