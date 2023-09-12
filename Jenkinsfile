@@ -62,7 +62,7 @@ pipeline{
 
             steps{
                 sh '''
-                    trviy image yaswanth345/datavisual:v1 > scan.txt
+                    trivy image yaswanth345/datavisual:v1 > scan.txt
                     cat scan.txt
                 '''
             }
