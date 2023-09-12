@@ -42,16 +42,20 @@ pipeline{
         stage("Sonar Code Qality"){
             when{ expression { params.action == 'create'}}
             steps{
-                def SonarQubecredentialsId = 'sonarqube-api'
-                statiCodeAnalysis(SonarQubecredentialsId)
+                script{
+                    def SonarQubecredentialsId = 'sonarqube-api'
+                    statiCodeAnalysis(SonarQubecredentialsId)
+                }
             }
         }
 
         stage("Sonar Qality Gates"){
 
             steps{
-                def SonarQubecredentialsId = 'sonarqube-api'
-                qualityGateAnalysis(SonarQubecredentialsId)
+                script{
+                    def SonarQubecredentialsId = 'sonarqube-api'
+                    qualityGateAnalysis(SonarQubecredentialsId)
+                }
             }
         }
 
