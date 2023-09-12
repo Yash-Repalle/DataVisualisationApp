@@ -24,5 +24,12 @@ pipeline{
                 sh 'mvn verify -DskipUnitTests'
             }
         }
+
+        stage("Sonar Code Qality"){
+
+            steps{
+                sh 'mvn clean package sonar:sonar'
+            }
+        }
     }    
 }
