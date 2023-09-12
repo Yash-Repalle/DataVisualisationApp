@@ -47,5 +47,15 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
+
+        stage("Docker Image Build"){
+
+            steps{
+                sh '''
+                    docker image build -t yaswanth:dataVisual .
+                    docker image tag yaswanth:dataVisual yaswanth:dataVisual:v1
+                '''
+            }
+        }
     }    
 }
